@@ -19,6 +19,32 @@ header h1 {
   width: 100%;
   height: 100%;
 }
+/* calendar start */
+.calendar-months {
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background-color: pink;
+  width:714px;
+  list-style-type: none;
+  display: flex;
+}
+.calendar-days {
+  margin: 0;
+  padding: 0;
+  background-color: yellow;
+  width:714px;
+  list-style-type: none;
+  display: flex;
+}
+.calendar-day {
+  width:100px;
+  border: 1px solid blue;
+}
+.calendar-dates {
+  width: 714px;
+  border: 1px solid red;
+}
 
 /* todos style */
 .todos-container {
