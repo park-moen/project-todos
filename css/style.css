@@ -1,5 +1,6 @@
 body {
   box-sizing: border-box;
+  font-size: 10px;
 }
 header {
   border: 5px solid black;
@@ -11,7 +12,7 @@ header h1 {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 500px;
+  height: 80vh;
 }
 .calendar-container {
   border: 5px solid blue;
@@ -44,9 +45,29 @@ header h1 {
   width: 714px;
   border: 1px solid red;
 }
-/* calendar end */
+
+/* todos style */
 .todos-container {
   border: 5px solid red;
   width: 100%;
   height: 100%;
+}
+.todos-main {
+  text-align: center;
+  font-weight: 700;
+}
+.todos-main .todos-date {
+  padding: 2rem 0 1rem;
+  font-size: 4rem;
+}
+.todos-main .todos-day {
+  padding: 1rem 0 1.5rem;
+  font-size: 2rem;
+}
+.todos-main .todos-input {
+  border: 0;
+  padding: 10px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  font-size: 1rem;
 }
