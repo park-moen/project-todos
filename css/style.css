@@ -1,0 +1,22 @@
+header {
+  border: 5px solid black;
+}
+header h1 {
+  text-align: center;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
+}
+.calender {
+  border: 5px solid blue;
+  width: 100%;
+  height: 100%;
+}
+.todos {
+  border: 5px solid red;
+  width: 100%;
+  height: 100%;
+}
