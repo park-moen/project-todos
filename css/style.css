@@ -130,15 +130,17 @@ h1 > span:last-child {
   font-size: 5rem;
   height: 80px;
 }
+.sat {
+  color: blue;
+}
+.sun {
+  color: red;
+}
 .calendar-date.today {
   background-image: url('../img/red_circle.png');
   background-position: center;
   background-size: 60% 140%;
   background-repeat: no-repeat;
-}
-.calendar-date:hover {
-  font-size: 5rem;
-  background-color: pink;
 }
 .calendar-days {
   text-align: center;
@@ -185,10 +187,14 @@ h1 > span:last-child {
   font-size: 5rem;
 }
 .date-selected {
-  background-color: skyblue;
+text-decoration: underline;
+text-decoration-color: red;
 }
 .scheduled {
-  background-color: tomato;
+  background-image: url(../img/star.png);
+  background-position: bottom left;
+  background-size: 60% 140%;
+  background-repeat: no-repeat;
 }
 /* todos style */
 .todos-container {

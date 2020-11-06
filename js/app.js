@@ -32,6 +32,20 @@ const getThisMonth = selected => {
   [...$calendarMonths.children].forEach(month => month === selected ? 
     month.classList.toggle('this-month', true) : month.classList.toggle('this-month', false));
 };
+const addSunSatClass = () => {
+  [...$calendarDates.children].forEach((date, i) => {
+    if ((i+1) % 7 === 0) { date.classList.add('sat'); }
+    if ((i+1) % 7 === 1) { date.classList.add('sun'); }
+  })
+}
+const checkSelect = () => {
+  if (document.querySelector('.date-selected')) {
+    $todosInput.setAttribute('placeholder', '일정을 입력하세요!');
+  } else {
+    $todosInput.setAttribute('placeholder', '날짜를 선택해주세요!');
+  }
+}
+
 const renderCalendar = () => {
   $thisMonth = document.querySelector('.this-month');
   const selectedMonth = dataOfEachMonth[+$thisMonth.textContent - 1];
@@ -54,6 +68,7 @@ const renderCalendar = () => {
     if (today.getDate() === i && +today.getMonth() + 1 === +document.querySelector('.this-month').textContent) $li.classList.add('today');
     $calendarDates.appendChild($li);
   }
+  addSunSatClass();
 };
 // Todos function
 const listRender = () => {
@@ -152,6 +167,7 @@ $calendarDates.onclick = e => {
   });
   renderDay(e.target);
   listRender();
+  checkSelect();
 };
 $calendarDates.oncontextmenu = e => {
   if (!e.target.matches('.calendar-date')) return;
@@ -159,6 +175,7 @@ $calendarDates.oncontextmenu = e => {
   [...$calendarDates.children].forEach(date => {
     date.classList.remove('date-selected');
   });
+  checkSelect();
 };
 // TodosEVENTS
 window.onload = fetchTodos;
