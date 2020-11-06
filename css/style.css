@@ -26,7 +26,7 @@ header h1 {
   margin: 0;
   padding: 0;
   background-color: pink;
-  width:714px;
+  width: 714px;
   list-style-type: none;
   display: flex;
 }
@@ -62,7 +62,7 @@ header h1 {
   display: flex;
 }
 .calendar-day {
-  width:100px;
+  width: 100px;
   border: 1px solid blue;
 }
 .calendar-dates {
@@ -106,4 +106,17 @@ header h1 {
   border: 2px solid lightgray;
   border-radius: 5px;
   font-size: 1rem;
+}
+.todos-list {
+  padding: 0;
+  list-style-type: none;
+}
+.todos-list > li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5rem;
+  font-size: 2rem;
+}
+.todos-list > li > label > input {
+  border: 0 #fff;
 }
