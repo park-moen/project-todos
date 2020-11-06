@@ -128,10 +128,9 @@ h1 > span:last-child {
 .date-selected {
   background-color: skyblue;
 }
-.date-selected {
-  background-color: skyblue;
+.scheduled {
+  background-color: tomato;
 }
-
 /* todos style */
 .todos-container {
   border: 5px solid red;
