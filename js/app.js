@@ -74,10 +74,10 @@ const renderCalendar = () => {
 const listRender = () => {
   let html = '';
   todos.filter(todo => todo.month === +$thisMonth.textContent && todo.date === +document.querySelector('.date-selected').textContent).forEach(
-    ({ id, todo, completed }) => {
+    ({ id, todo, time, completed }) => {
       html += `
         <li id="${id}" class="todo-item">
-          <label><input type="checkbox" ${completed ? ' checked' : ''}><span>${todo}</span></label>
+          <label><input type="checkbox" ${completed ? ' checked' : ''}><span>${time}&nbsp;&nbsp;${todo}</span></label>
           <i class="remove-todo fa fa-trash-o" aria-hidden="true"></i>
        </li>`;
     }
@@ -92,9 +92,14 @@ const maxId = () => (todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 
 const addTodosList = todo => {
   const newMonth = +document.querySelector('.this-month').textContent;
   const newDate = +document.querySelector('.date-selected').textContent;
+  let today = new Date();   
+  let hours = today.getHours(); // 시
+  let minutes = today.getMinutes();  // 분
+  let seconds = today.getSeconds();  // 초
+  let milliseconds = today.getMilliseconds(); // 밀리초
   let newDay = (newDate % 7) + dataOfEachMonth[newMonth - 1].startDay - 1;
   newDay = newDay > 6 ? newDay - 7 : (newDay === -1 ? 6 : newDay);
-  todos = [...todos, { id: maxId(), month: newMonth, date: newDate , day: newDay, todo, completed: false }];
+  todos = [...todos, { id: maxId(), month: newMonth, date: newDate , day: newDay, todo, time:`${hours}:${minutes}:${seconds}`, completed: false }];
   listRender($todosInput.value);
 };
 const checkTodosLengthOverFive = () => {
