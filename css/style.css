@@ -89,6 +89,17 @@ h1 > span:last-child {
   border: 5px solid blue;
   width: 707px;
   height: 100%;
+  position: relative;
+}
+.display-monthly-todos {
+  background-color: white;
+  outline-width: 0;
+  padding: 10px;
+  position: absolute;
+  bottom:30px;
+  right:0;
+  left:0;
+  margin: 0 auto;
 }
 /* calendar start */
 .calendar-months {
@@ -268,11 +279,6 @@ text-decoration-color: red;
 .todo-item:hover > .remove-todo {
   display: block;
 }
-.display-monthly-todos {
-  position: absolute;
-  bottom:0;
-  right:0;
-}
 .monthly-plan {
   width: 100%;
   height:100%;
@@ -283,11 +289,7 @@ text-decoration-color: red;
   list-style-type: none;
 }
 .monthly-plan.show {
-  transform: translateY(-56%);
+  transform: translateY(-57%);
   transition: ease-in-out 1s ;
 }
-.display-monthly-todos {
-  background-color: pink;
-  outline-width: 0;
-  padding: 10px;
-}
+

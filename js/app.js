@@ -36,8 +36,8 @@ const addSunSatClass = () => {
   [...$calendarDates.children].forEach((date, i) => {
     if ((i+1) % 7 === 0) { date.classList.add('sat'); }
     if ((i+1) % 7 === 1) { date.classList.add('sun'); }
-  })
-}
+  });
+};
 const checkSelect = () => {
   if (document.querySelector('.date-selected')) {
     $todosInput.setAttribute('placeholder', '일정을 입력하세요!');
@@ -130,6 +130,16 @@ const renderToday = () => {
 const addScheduled = selected => {
   selected.classList.add('scheduled');
 };
+const displayMonthlyTodos = () => {
+  if (!todosOfSelectedMonth.length) $monthlyPlan.textContent = "이번달에 입력한 일정이 없습니다.";
+  else if (todosOfSelectedMonth.length) $monthlyPlan.innerHTML = todosOfSelectedMonth.map(todo => `<li>${todo.month}월 ${todo.date}일 : ${todo.todo}</li>`).join('');
+  
+  if ($monthlyPlan.classList.contains('show')) {
+    $monthlyBtn.textContent = '닫기';
+  } else {
+    $monthlyBtn.textContent = '월간일정 보기';
+  }
+};
 // CalendarEVENTS
 document.addEventListener('DOMContentLoaded', () => {
   dataOfEachMonth = fetchDataOfEachMonths();
@@ -153,13 +163,7 @@ $calendarDates.onclick = e => {
   });
   renderDay(e.target);
 };
-$calendarDates.oncontextmenu = e => {
-  if (!e.target.matches('.calendar-date')) return;
-  e.preventDefault();
-  [...$calendarDates.children].forEach(date => {
-    date.classList.remove('date-selected');
-  });
-};
+
 $calendarDates.onclick = e => {
   if (!e.target.matches('.calendar-date')) return;
   [...$calendarDates.children].forEach(date => {
@@ -177,6 +181,7 @@ $calendarDates.oncontextmenu = e => {
   });
   checkSelect();
 };
+
 // TodosEVENTS
 window.onload = fetchTodos;
 $todosInput.onkeyup = e => {
@@ -201,18 +206,22 @@ $todosInput.onkeyup = e => {
 $todosList.onclick = e => {
   if (!e.target.matches('.remove-todo')) return;
   removeTodosList(e.target.parentNode.id);
+  displayMonthlyTodos();
+  $monthlyPlan.classList.remove('show');
+  renderCalendar();
 };
 $todosList.onchange = e => {
   updateCompleted(e.target);
 };
 $monthlyBtn.onclick = e => {
   $monthlyPlan.classList.toggle('show');
-  if (!todosOfSelectedMonth.length) $monthlyPlan.textContent = "이번달에 입력한 일정이 없습니다.";
-  else if (todosOfSelectedMonth.length) $monthlyPlan.innerHTML = todosOfSelectedMonth.map(todo => `<li>${todo.month}월 ${todo.date}일 : ${todo.todo}</li>`).join('');
+  // if (!todosOfSelectedMonth.length) $monthlyPlan.textContent = "이번달에 입력한 일정이 없습니다.";
+  // else if (todosOfSelectedMonth.length) $monthlyPlan.innerHTML = todosOfSelectedMonth.map(todo => `<li>${todo.month}월 ${todo.date}일 : ${todo.todo}</li>`).join('');
   
-  if ($monthlyPlan.classList.contains('show')) {
-    $monthlyBtn.textContent = '닫기';
-  } else {
-    $monthlyBtn.textContent = '월간일정 보기';
-  }
+  // if ($monthlyPlan.classList.contains('show')) {
+  //   $monthlyBtn.textContent = '닫기';
+  // } else {
+  //   $monthlyBtn.textContent = '월간일정 보기';
+  // }
+  displayMonthlyTodos();
 };
