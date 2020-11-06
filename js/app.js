@@ -13,6 +13,8 @@ const $todosList = document.querySelector('.todos-list');
 const $todosInput = document.querySelector('.todos-input');
 const $todoDate = document.querySelector('.todos-date');
 const $todoDay = document.querySelector('.todos-day');
+const $monthlyBtn = document.querySelector('.display-monthly-todos');
+const $monthlyPlan = document.querySelector('.monthly-plan');
 // Calendar functions
 const fetchDataOfEachMonths = () => [
   { month: 1, startDay: 3, lastDate: 31 }, { month: 2, startDay: 6, lastDate: 29 },
@@ -22,14 +24,7 @@ const fetchDataOfEachMonths = () => [
   { month: 9, startDay: 2, lastDate: 30 }, { month: 10, startDay: 4, lastDate: 31 },
   { month: 11, startDay: 0, lastDate: 30 }, { month: 12, startDay: 2, lastDate: 31 },
 ];
-// const sumAllDates = month => {
-//   let sum = 0;
-//   for (let i = 0; i < month - 1; i++) {
-//     sum += dataOfEachMonth[i].lastDate;
-//     console.log(sum, 'sum');
-//   }
-//   return sum;
-// };
+
 const filterScheduleByMonth = () => {
   todosOfSelectedMonth = todos.filter(todo => +todo.month === +document.querySelector('.this-month').textContent);
 };
@@ -149,6 +144,7 @@ $calendarMonths.onclick = e => {
   getThisMonth(e.target);
   filterScheduleByMonth();
   renderCalendar();
+  $monthlyPlan.classList.remove('show');
 };
 $calendarDates.onclick = e => {
   if (!e.target.matches('.calendar-date')) return;
@@ -199,13 +195,24 @@ $todosInput.onkeyup = e => {
   console.log(e.target);
   addTodosList($todosInput.value);
   addScheduled(document.querySelector('.date-selected')); // 애드하면 스케쥴 클래스붙힘
+  filterScheduleByMonth();
   $todosInput.value = '';
 };
 $todosList.onclick = e => {
   if (!e.target.matches('.remove-todo')) return;
   removeTodosList(e.target.parentNode.id);
-  // 여기에 
 };
 $todosList.onchange = e => {
   updateCompleted(e.target);
+};
+$monthlyBtn.onclick = e => {
+  $monthlyPlan.classList.toggle('show');
+  if (!todosOfSelectedMonth.length) $monthlyPlan.textContent = "이번달에 입력한 일정이 없습니다.";
+  else if (todosOfSelectedMonth.length) $monthlyPlan.innerHTML = todosOfSelectedMonth.map(todo => `<li>${todo.month}월 ${todo.date}일 : ${todo.todo}</li>`).join('');
+  
+  if ($monthlyPlan.classList.contains('show')) {
+    $monthlyBtn.textContent = '닫기';
+  } else {
+    $monthlyBtn.textContent = '월간일정 보기';
+  }
 };
