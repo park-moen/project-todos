@@ -29,6 +29,25 @@ header h1 {
   list-style-type: none;
   display: flex;
 }
+
+
+/* 내가 씀 : this-month 글씨 조정 */
+/* 임시로 체크 잘 되나 확인하는 거 */
+.calendar-months > .month {
+  display: inline;
+  font-size: 1.5rem;
+  vertical-align: bottom;
+}
+
+.calendar-months > .this-month {
+  color: red;
+  font-size: 2rem;
+}
+
+.calendar-months > .month:hover {
+  color: pink;
+}
+
 .calendar-days {
   margin: 0;
   padding: 0;
