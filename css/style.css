@@ -21,6 +21,7 @@ header h1 {
 }
 /* calendar start */
 .calendar-months {
+  font-size: 1.5rem;
   justify-content: center;
   margin: 0;
   padding: 0;
@@ -29,11 +30,34 @@ header h1 {
   list-style-type: none;
   display: flex;
 }
+
+.calendar-months > .calendar-date {
+  display: inline;
+  vertical-align: bottom;
+}
+.calendar-months > .this-month {
+  color: red;
+  font-size: 3rem;
+  transition-duration: 1s;
+  transition-property: font-size;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); 
+}
+.calendar-dates {
+  font-size: 2rem;
+}
+.calendar-dates {
+  font-size: 2rem;
+  height: 80px;
+}
+.calendar-date:hover {
+  font-size: 2rem;
+  background-color: pink;
+}
 .calendar-days {
   margin: 0;
   padding: 0;
   background-color: yellow;
-  width:714px;
+  width:700px;
   list-style-type: none;
   display: flex;
 }
@@ -42,9 +66,21 @@ header h1 {
   border: 1px solid blue;
 }
 .calendar-dates {
-  width: 714px;
-  border: 1px solid red;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: wrap;
+  list-style-type: none;
+  width: 700px;
 }
+.calendar-space {
+  width:100px;
+  height: 100;
+}
+.calendar-date {
+  width:100px;
+}
+
 
 /* todos style */
 .todos-container {
