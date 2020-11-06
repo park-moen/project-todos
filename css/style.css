@@ -5,10 +5,46 @@ body {
 .title {
   border: 5px solid black;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
 }
 .title h1 {
   margin: 2rem 0;
+  letter-spacing: 1rem;
+}
+h1 > span:first-child {
+  padding-right: 1.5rem;
+}
+h1 > span:last-child {
+  padding-left: 1.5rem;
+}
+.tracking-in-expand {
+  -webkit-animation: tracking-in-expand 5s cubic-bezier(0.215, 0.61, 0.355, 1)
+    both;
+  animation: tracking-in-expand 5s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .container {
   display: flex;
@@ -21,6 +57,7 @@ body {
   width: 100%;
   height: 100%;
 }
+
 /* calendar start */
 .calendar-months {
   font-size: 1.5rem;
@@ -136,9 +173,10 @@ body {
   font-size: 2rem;
 }
 .todos-list > li > label > input {
-  border: 0 #fff;
+  display: none;
 }
 .todos-list > li > label > input[type='checkbox']:checked + span {
+  /* text-decoration-color: red; */
   text-decoration: line-through;
 }
 
