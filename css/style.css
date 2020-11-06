@@ -80,7 +80,9 @@ header h1 {
 .calendar-date {
   width:100px;
 }
-
+.date-selected {
+  background-color: skyblue;
+}
 
 /* todos style */
 .todos-container {

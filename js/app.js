@@ -1,7 +1,6 @@
 // states
 let dataOfEachMonth = [];
 let todos = [];
- 
 // CalendarDOMs
 let $thisMonth = document.querySelector('.this-month');
 const $calendarMonths = document.querySelector('.calendar-months');
@@ -15,7 +14,7 @@ const $todosInput = document.querySelector('.todos-input');
 const fetchDataOfEachMonths = () => [
   { month: 1, startDay: 3, lastDate: 31 }, { month: 2, startDay: 6, lastDate: 29 },
   { month: 3, startDay: 0, lastDate: 31 }, { month: 4, startDay: 3, lastDate: 30 },
-  { month: 5, startDay: 5, lastDate: 30 }, { month: 6, startDay: 1, lastDate: 30 },
+  { month: 5, startDay: 5, lastDate: 31 }, { month: 6, startDay: 1, lastDate: 30 },
   { month: 7, startDay: 3, lastDate: 31 }, { month: 8, startDay: 6, lastDate: 31 },
   { month: 9, startDay: 2, lastDate: 30 }, { month: 10, startDay: 4, lastDate: 31 },
   { month: 11, startDay: 0, lastDate: 30 }, { month: 12, startDay: 2, lastDate: 31 },
@@ -23,7 +22,7 @@ const fetchDataOfEachMonths = () => [
 const getThisMonth = selected => {
   [...$calendarMonths.children].forEach(month => month === selected ? 
     month.classList.toggle('this-month', true) : month.classList.toggle('this-month', false));
-}
+};
 const renderCalendar = () => {
   $thisMonth = document.querySelector('.this-month');
   const selectedMonth = dataOfEachMonth[+$thisMonth.textContent - 1];
@@ -42,11 +41,6 @@ const renderCalendar = () => {
 };
 
 // Todos function
-const fetchTodos = () => {
-  todos = [];
-
-  listRender();
-}
 const listRender = () => {
   let html = '';
   todos.forEach(
@@ -61,10 +55,17 @@ const listRender = () => {
 
   $todosList.innerHTML = html;
 };
+
+const fetchTodos = () => {
+  todos = [];
+
+  listRender();
+};
+
 const maxId = () => (todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1);
 
 const addTodosList = content => {
-  todos = [...todos, {id: maxId(), content, completed: false}];
+  todos = [...todos, { id: maxId(), content, completed: false }];
 
   listRender();
 };
@@ -82,12 +83,27 @@ $calendarMonths.onclick = e => {
   renderCalendar();
 };
 
+$calendarDates.onclick = e => {
+  if (!e.target.matches('.calendar-date')) return;
+  [...$calendarDates.children].forEach(date => {
+    date.classList.toggle('date-selected', e.target === date);
+  });
+};
+
+$calendarDates.oncontextmenu = e => {
+  if (!e.target.matches('.calendar-date')) return;
+
+  e.preventDefault();
+  [...$calendarDates.children].forEach(date => {
+    date.classList.remove('date-selected');
+  });
+};
+
 // TodosEVENTS
 window.onload = fetchTodos;
 
 $todosInput.onkeyup = e => {
   if (e.key !== 'Enter' || !e.target.value) return;
-
   addTodosList($todosInput.value);
   $todosInput.value = '';
 };
