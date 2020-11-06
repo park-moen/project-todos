@@ -68,10 +68,6 @@ body {
   list-style-type: none;
   display: flex;
 }
-.calendar-day {
-  width: 100px;
-  border: 1px solid blue;
-}
 .calendar-dates {
   margin: 0;
   padding: 0;
@@ -85,10 +81,12 @@ body {
   height: 100;
 }
 .calendar-date {
-  width:100px;
+  width: 100px;
   text-align: center;
 }
+.calendar-day {
   width: 100px;
+  border: 1px solid blue;
 }
 /* todos style */
 .todos-container {
@@ -117,7 +115,7 @@ body {
 }
 .alert {
   height: 10px;
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: rgb(255, 0, 0);
 }
 .todos-list {
