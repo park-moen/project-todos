@@ -1,6 +1,7 @@
 // states
 let dataOfEachMonth = [];
 let todos = [];
+let todosOfSelectedMonth = []; // 선택된 달의 일정만 담을 배열
 const today = new Date();
 const days = ['일', '월', '화', '수', '목', '금', '토'];
 // CalendarDOMs
@@ -29,6 +30,10 @@ const fetchDataOfEachMonths = () => [
 //   }
 //   return sum;
 // };
+const filterScheduleByMonth = () => {
+  todosOfSelectedMonth = todos.filter(todo => +todo.month === +document.querySelector('.this-month').textContent);
+};
+
 const getThisMonth = selected => {
   [...$calendarMonths.children].forEach(month => month === selected ? 
     month.classList.toggle('this-month', true) : month.classList.toggle('this-month', false));
@@ -37,6 +42,7 @@ const renderCalendar = () => {
   $thisMonth = document.querySelector('.this-month');
   const selectedMonth = dataOfEachMonth[+$thisMonth.textContent - 1];
   $calendarDates.innerHTML = '';
+  filterScheduleByMonth();
   for (let i = 0; i < selectedMonth.startDay; i++) {
     const $li = document.createElement('li');
     $li.classList.add('calendar-space');
@@ -46,20 +52,16 @@ const renderCalendar = () => {
     const $li = document.createElement('li');
     $li.classList.add('calendar-date');
     $li.appendChild(document.createTextNode(i + ''));
+    if (todosOfSelectedMonth.length) {
+      todosOfSelectedMonth.forEach(todo => {
+        if (+todo.date === i) $li.classList.add('scheduled');
+      });
+    }
     if (today.getDate() === i && +today.getMonth() + 1 === +document.querySelector('.this-month').textContent) $li.classList.add('today');
     $calendarDates.appendChild($li);
   }
 };
-// const addNewTodo = () => {
-//   const newMonth = +document.querySelector('.this-month').textContent;
-//   const newDate = +document.querySelector('.date-selected').textContent;
-//   const newDay = (+document.querySelector('.date-selected').textContent % 7) + dataOfEachMonth[newMonth - 1].startDay - 1;
-//   console.log(newMonth, newDate);
-//   todos = [
-//     { month: newMonth, date: newDate , day: newDay, todo: $todosInput.value }, ...todos
-//   ];
-//   console.log(todos);
-// };
+
 // Todos function
 const listRender = () => {
   let html = '';
@@ -111,17 +113,24 @@ const renderToday = () => {
   $todoDate.textContent = today.getDate() + '';
   $todoDay.textContent = days[today.getDay()];
 };
+
+const addScheduled = selected => {
+  selected.classList.add('scheduled');
+};
+
 // CalendarEVENTS
 document.addEventListener('DOMContentLoaded', () => {
   dataOfEachMonth = fetchDataOfEachMonths();
   console.log(dataOfEachMonth);
   renderCalendar();
+  filterScheduleByMonth(today.getMonth());
   renderToday();
 });
 $calendarMonths.onclick = e => {
   if (!e.target.classList.contains('month')) return;
   console.log(e.target);
   getThisMonth(e.target);
+  filterScheduleByMonth(+e.target.textContent);
   renderCalendar();
 };
 $calendarDates.onclick = e => {
@@ -163,8 +172,9 @@ $todosInput.onkeyup = e => {
     setTimeout(editAlert, 2000, '');
     return;
   }
-  // addNewTodo();
+  console.log(e.target);
   addTodosList($todosInput.value);
+  addScheduled(document.querySelector('.date-selected')); // 애드하면 스케쥴 클래스붙힘
   $todosInput.value = '';
 };
 $todosList.onclick = e => {
