@@ -91,6 +91,10 @@ body {
 .date-selected {
   background-color: skyblue;
 }
+.date-selected {
+  background-color: skyblue;
+}
+
 /* todos style */
 .todos-container {
   border: 5px solid red;
@@ -137,14 +141,17 @@ body {
 .todos-list > li > label > input[type='checkbox']:checked + span {
   text-decoration: line-through;
 }
+
 .remove-todo {
   display: none;
-  position: absolute;
   top: 60%;
   right: 100px;
   cursor: pointer;
-  transform: translate3d(0, -50%, 0);
-  font-size: 3rem;
+  font-size: 2rem;
+}
+.todo-item {
+  display: flex;
+  vertical-align: middle;
 }
 .todo-item:hover > .remove-todo {
   display: block;

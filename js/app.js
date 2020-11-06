@@ -16,7 +16,7 @@ const $todosInput = document.querySelector('.todos-input');
 const fetchDataOfEachMonths = () => [
   { month: 1, startDay: 3, lastDate: 31 }, { month: 2, startDay: 6, lastDate: 29 },
   { month: 3, startDay: 0, lastDate: 31 }, { month: 4, startDay: 3, lastDate: 30 },
-  { month: 5, startDay: 5, lastDate: 30 }, { month: 6, startDay: 1, lastDate: 30 },
+  { month: 5, startDay: 5, lastDate: 31 }, { month: 6, startDay: 1, lastDate: 30 },
   { month: 7, startDay: 3, lastDate: 31 }, { month: 8, startDay: 6, lastDate: 31 },
   { month: 9, startDay: 2, lastDate: 30 }, { month: 10, startDay: 4, lastDate: 31 },
   { month: 11, startDay: 0, lastDate: 30 }, { month: 12, startDay: 2, lastDate: 31 },
@@ -38,7 +38,7 @@ const renderCalendar = () => {
     const $li = document.createElement('li');
     $li.classList.add('calendar-date');
     $li.appendChild(document.createTextNode(i + ''));
-    if (today.getDate() === i) $li.classList.add('today');
+    if (today.getDate() === i && +today.getMonth() + 1 === +document.querySelector('.this-month').textContent) $li.classList.add('today');
     $calendarDates.appendChild($li);
   }
 };
@@ -100,6 +100,22 @@ $calendarDates.onclick = e => {
 };
 $calendarDates.oncontextmenu = e => {
   if (!e.target.matches('.calendar-date')) return;
+  e.preventDefault();
+  [...$calendarDates.children].forEach(date => {
+    date.classList.remove('date-selected');
+  });
+};
+
+$calendarDates.onclick = e => {
+  if (!e.target.matches('.calendar-date')) return;
+  [...$calendarDates.children].forEach(date => {
+    date.classList.toggle('date-selected', e.target === date);
+  });
+};
+
+$calendarDates.oncontextmenu = e => {
+  if (!e.target.matches('.calendar-date')) return;
+
   e.preventDefault();
   [...$calendarDates.children].forEach(date => {
     date.classList.remove('date-selected');
