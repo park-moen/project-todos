@@ -87,7 +87,7 @@ h1 > span:last-child {
 }
 .calendar-container {
   border: 5px solid blue;
-  width: 100%;
+  width: 707px;
   height: 100%;
 }
 /* calendar start */
@@ -99,7 +99,7 @@ h1 > span:last-child {
   margin: 0;
   padding: 0;
   background-color: #7498a8;
-  width: 714px;
+  width: 707px;
   list-style-type: none;
   display: flex;
 }
@@ -146,7 +146,7 @@ h1 > span:last-child {
   margin: 0;
   padding: 0;
   background-color: #bdc3c7;
-  width: 72rem;
+  width: 707px;
   list-style-type: none;
   display: flex;
   font-weight: 400;
@@ -158,15 +158,21 @@ h1 > span:last-child {
   display: flex;
   flex-flow: wrap;
   list-style-type: none;
-  width: 700px;
+  width: 707px;
 }
 .calendar-space {
   width: 100px;
   height: 100;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
 }
 .calendar-date {
   width: 100px;
   text-align: center;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
 }
 .calendar-day:first-child {
   color: red;
@@ -190,6 +196,7 @@ h1 > span:last-child {
   border: 5px solid red;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 .todos-main {
   text-align: center;
@@ -210,6 +217,7 @@ h1 > span:last-child {
   border: 0.3rem solid lightgray;
   border-radius: 1rem;
   font-size: 2rem;
+  position: relative; 
 }
 .alert {
   height: 1.5rem;
@@ -253,4 +261,27 @@ h1 > span:last-child {
 }
 .todo-item:hover > .remove-todo {
   display: block;
+}
+.display-monthly-todos {
+  position: absolute;
+  bottom:0;
+  right:0;
+}
+.monthly-plan {
+  width: 100%;
+  height:100%;
+  background-color: white;
+  transform: translateY(100%);
+  transition: ease-in-out 1s ;
+  font-size: 2rem;
+  list-style-type: none;
+}
+.monthly-plan.show {
+  transform: translateY(-56%);
+  transition: ease-in-out 1s ;
+}
+.display-monthly-todos {
+  background-color: pink;
+  outline-width: 0;
+  padding: 10px;
 }
