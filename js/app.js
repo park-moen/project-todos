@@ -111,6 +111,11 @@ const renderToday = () => {
   $todoDate.textContent = today.getDate() + '';
   $todoDay.textContent = days[today.getDay()];
 };
+
+const removeTodo = target => {
+  $
+};
+
 // CalendarEVENTS
 document.addEventListener('DOMContentLoaded', () => {
   dataOfEachMonth = fetchDataOfEachMonths();
