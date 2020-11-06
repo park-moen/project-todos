@@ -57,7 +57,6 @@ h1 > span:last-child {
   width: 100%;
   height: 100%;
 }
-
 /* calendar start */
 .calendar-months {
   font-size: 1.5rem;
@@ -131,7 +130,6 @@ h1 > span:last-child {
 .date-selected {
   background-color: skyblue;
 }
-
 /* todos style */
 .todos-container {
   border: 5px solid red;
@@ -179,7 +177,6 @@ h1 > span:last-child {
   /* text-decoration-color: red; */
   text-decoration: line-through;
 }
-
 .remove-todo {
   display: none;
   top: 60%;
