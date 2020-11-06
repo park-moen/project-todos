@@ -1,16 +1,14 @@
 // states
 let dataOfEachMonth = [];
 let todos = [];
- 
+const today = new Date();
 // CalendarDOMs
 let $thisMonth = document.querySelector('.this-month');
 const $calendarMonths = document.querySelector('.calendar-months');
 const $calendarDates = document.querySelector('.calendar-dates');
-
 // TodosDOMs
 const $todosList = document.querySelector('.todos-list');
 const $todosInput = document.querySelector('.todos-input');
-
 // Calendar functions
 const fetchDataOfEachMonths = () => [
   { month: 1, startDay: 3, lastDate: 31 }, { month: 2, startDay: 6, lastDate: 29 },
@@ -23,7 +21,7 @@ const fetchDataOfEachMonths = () => [
 const getThisMonth = selected => {
   [...$calendarMonths.children].forEach(month => month === selected ? 
     month.classList.toggle('this-month', true) : month.classList.toggle('this-month', false));
-}
+};
 const renderCalendar = () => {
   $thisMonth = document.querySelector('.this-month');
   const selectedMonth = dataOfEachMonth[+$thisMonth.textContent - 1];
@@ -37,16 +35,11 @@ const renderCalendar = () => {
     const $li = document.createElement('li');
     $li.classList.add('calendar-date');
     $li.appendChild(document.createTextNode(i + ''));
+    if (today.getDate() === i) $li.classList.add('today');
     $calendarDates.appendChild($li);
   }
 };
-
 // Todos function
-const fetchTodos = () => {
-  todos = [];
-
-  listRender();
-}
 const listRender = () => {
   let html = '';
   todos.forEach(
@@ -58,16 +51,20 @@ const listRender = () => {
        </li>`;
     }
   );
-
   $todosList.innerHTML = html;
 };
-const maxId = () => (todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1);
-
-const addTodosList = content => {
-  todos = [...todos, {id: maxId(), content, completed: false}];
-
+const fetchTodos = () => {
+  todos = [];
   listRender();
 };
+const maxId = () => (todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1);
+const addTodosList = content => {
+  todos = [...todos, { id: maxId(), content, completed: false }];
+  listRender();
+};
+const editAlert = msg => {
+  document.querySelector('.alert').textContent = msg;
+}
 
 const removeTodosList = id => {
   todos = todos.filter(todo => todo.id !== +id);
@@ -93,13 +90,17 @@ $calendarMonths.onclick = e => {
   getThisMonth(e.target);
   renderCalendar();
 };
-
 // TodosEVENTS
 window.onload = fetchTodos;
-
 $todosInput.onkeyup = e => {
   if (e.key !== 'Enter' || !e.target.value) return;
-
+  if (todos.length >= 5) {
+    $todosInput.value = '';
+    editAlert('일정 추가는 최대 5개까지 가능합니다.');
+    console.log(document.querySelector('.alert').textContent);
+    setTimeout(editAlert, 2000, '');
+    return;
+  }
   addTodosList($todosInput.value);
   $todosInput.value = '';
 };

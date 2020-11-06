@@ -32,7 +32,6 @@ body {
   list-style-type: none;
   display: flex;
 }
-
 .calendar-months > .calendar-date {
   display: inline;
   vertical-align: bottom;
@@ -50,6 +49,12 @@ body {
 .calendar-dates {
   font-size: 2rem;
   height: 80px;
+}
+.calendar-date.today {
+  background-image: url('../img/red_circle.png');
+  background-position: center;
+  background-size: 60% 140%;
+  background-repeat: no-repeat;
 }
 .calendar-date:hover {
   font-size: 2rem;
@@ -80,9 +85,11 @@ body {
   height: 100;
 }
 .calendar-date {
+  width:100px;
+  text-align: center;
+}
   width: 100px;
 }
-
 /* todos style */
 .todos-container {
   border: 5px solid red;
@@ -107,6 +114,11 @@ body {
   border: 2px solid lightgray;
   border-radius: 5px;
   font-size: 1rem;
+}
+.alert {
+  height: 10px;
+  font-size: .8rem;
+  color: rgb(255, 0, 0);
 }
 .todos-list {
   padding: 0;
