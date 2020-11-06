@@ -88,6 +88,9 @@ body {
   width: 100px;
   border: 1px solid blue;
 }
+.date-selected {
+  background-color: skyblue;
+}
 /* todos style */
 .todos-container {
   border: 5px solid red;

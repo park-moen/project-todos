@@ -2,13 +2,16 @@
 let dataOfEachMonth = [];
 let todos = [];
 const today = new Date();
+
 // CalendarDOMs
 let $thisMonth = document.querySelector('.this-month');
 const $calendarMonths = document.querySelector('.calendar-months');
 const $calendarDates = document.querySelector('.calendar-dates');
+
 // TodosDOMs
 const $todosList = document.querySelector('.todos-list');
 const $todosInput = document.querySelector('.todos-input');
+
 // Calendar functions
 const fetchDataOfEachMonths = () => [
   { month: 1, startDay: 3, lastDate: 31 }, { month: 2, startDay: 6, lastDate: 29 },
@@ -39,6 +42,7 @@ const renderCalendar = () => {
     $calendarDates.appendChild($li);
   }
 };
+
 // Todos function
 const listRender = () => {
   let html = '';
@@ -65,13 +69,11 @@ const addTodosList = content => {
 const editAlert = msg => {
   document.querySelector('.alert').textContent = msg;
 }
-
 const removeTodosList = id => {
   todos = todos.filter(todo => todo.id !== +id);
 
   listRender();
 };
-
 const updateCompleted = target => {
   todos.forEach(todo => {
     if (todo.id === +target.parentNode.parentNode.id) todo.completed = !todo.completed;
@@ -90,6 +92,20 @@ $calendarMonths.onclick = e => {
   getThisMonth(e.target);
   renderCalendar();
 };
+$calendarDates.onclick = e => {
+  if (!e.target.matches('.calendar-date')) return;
+  [...$calendarDates.children].forEach(date => {
+    date.classList.toggle('date-selected', e.target === date);
+  });
+};
+$calendarDates.oncontextmenu = e => {
+  if (!e.target.matches('.calendar-date')) return;
+  e.preventDefault();
+  [...$calendarDates.children].forEach(date => {
+    date.classList.remove('date-selected');
+  });
+};
+
 // TodosEVENTS
 window.onload = fetchTodos;
 $todosInput.onkeyup = e => {
@@ -106,7 +122,6 @@ $todosInput.onkeyup = e => {
 };
 $todosList.onclick = e => {
   if (!e.target.matches('.todos-list .remove-todo')) return;
-  console.log(e.target);
   removeTodosList(e.target.parentNode.id);
 };
 $todosList.onchange = e => {
