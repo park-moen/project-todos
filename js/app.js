@@ -2,15 +2,44 @@
 let dataOfEachMonth = [];
 let todos = [];
 const today = new Date();
-// DOMs
+// CalendarDOMs
+let $thisMonth = document.querySelector('.this-month');
 const $calendarMonths = document.querySelector('.calendar-months');
+const $calendarDates = document.querySelector('.calendar-dates');
+// TodosDOMs
 const $todosList = document.querySelector('.todos-list');
 const $todosInput = document.querySelector('.todos-input');
-// functions
-const fetchTodos = () => {
-  todos = [];
-  listRender();
-}
+// Calendar functions
+const fetchDataOfEachMonths = () => [
+  { month: 1, startDay: 3, lastDate: 31 }, { month: 2, startDay: 6, lastDate: 29 },
+  { month: 3, startDay: 0, lastDate: 31 }, { month: 4, startDay: 3, lastDate: 30 },
+  { month: 5, startDay: 5, lastDate: 30 }, { month: 6, startDay: 1, lastDate: 30 },
+  { month: 7, startDay: 3, lastDate: 31 }, { month: 8, startDay: 6, lastDate: 31 },
+  { month: 9, startDay: 2, lastDate: 30 }, { month: 10, startDay: 4, lastDate: 31 },
+  { month: 11, startDay: 0, lastDate: 30 }, { month: 12, startDay: 2, lastDate: 31 },
+];
+const getThisMonth = selected => {
+  [...$calendarMonths.children].forEach(month => month === selected ? 
+    month.classList.toggle('this-month', true) : month.classList.toggle('this-month', false));
+};
+const renderCalendar = () => {
+  $thisMonth = document.querySelector('.this-month');
+  const selectedMonth = dataOfEachMonth[+$thisMonth.textContent - 1];
+  $calendarDates.innerHTML = '';
+  for (let i = 0; i < selectedMonth.startDay; i++) {
+    const $li = document.createElement('li');
+    $li.classList.add('calendar-space');
+    $calendarDates.appendChild($li);
+  }
+  for (let i = 1; i <= selectedMonth.lastDate; i++) {
+    const $li = document.createElement('li');
+    $li.classList.add('calendar-date');
+    $li.appendChild(document.createTextNode(i + ''));
+    if (today.getDate() === i) $li.classList.add('today');
+    $calendarDates.appendChild($li);
+  }
+};
+// Todos function
 const listRender = () => {
   let html = '';
   todos.forEach(
@@ -24,46 +53,45 @@ const listRender = () => {
   );
   $todosList.innerHTML = html;
 };
+const fetchTodos = () => {
+  todos = [];
+  listRender();
+};
 const maxId = () => (todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1);
 const addTodosList = content => {
-  todos = [...todos, {id: maxId(), content, completed: false}];
+  todos = [...todos, { id: maxId(), content, completed: false }];
   listRender();
-}
-
-const getThisMonth = selected => {
-  [...$calendarMonths.children].forEach(month => month === selected ? 
-    month.classList.toggle('this-month', true) : month.classList.toggle('this-month', false));
 };
 
-const fetchDataOfEachMonths = () => [
-  { month: 1, startDay: 3, lastDate: 31 }, { month: 2, startDay: 6, lastDate: 29 },
-  { month: 3, startDay: 0, lastDate: 31 }, { month: 4, startDay: 3, lastDate: 30 },
-  { month: 5, startDay: 3, lastDate: 30 }, { month: 6, startDay: 1, lastDate: 30 },
-  { month: 7, startDay: 3, lastDate: 31 }, { month: 8, startDay: 6, lastDate: 31 },
-  { month: 9, startDay: 2, lastDate: 30 }, { month: 10, startDay: 4, lastDate: 31 },
-  { month: 11, startDay: 0, lastDate: 30 }, { month: 12, startDay: 2, lastDate: 31 },
-];
-// EVENTS
-document.addEventListener('DOMContentLoaded', () => {
-  dataOfEachMonth = fetchDataOfMonths();
-  console.log(dataOfEachMonth);
-});
 
+const editAlert = msg => {
+  document.querySelector('.alert').textContent = msg;
+}
+
+
+// CalendarEVENTS
+document.addEventListener('DOMContentLoaded', () => {
+  dataOfEachMonth = fetchDataOfEachMonths();
+  console.log(dataOfEachMonth);
+  renderCalendar();
+});
 $calendarMonths.onclick = e => {
   if (!e.target.classList.contains('month')) return;
+  console.log(e.target);
   getThisMonth(e.target);
-}
+  renderCalendar();
+};
+// TodosEVENTS
 window.onload = fetchTodos;
 $todosInput.onkeyup = e => {
   if (e.key !== 'Enter' || !e.target.value) return;
   if (todos.length >= 5) {
-    document.querySelector('.alert').textContent = '일정 추가는 최대 5개까지 가능합니다ㅎ';
-    setTimeout(() =>{
-      document.querySelector('.alert').textContent = '';
-    }, 2000);
+    $todosInput.value = '';
+    editAlert('일정 추가는 최대 5개까지 가능합니다.');
+    console.log(document.querySelector('.alert').textContent);
+    setTimeout(editAlert, 2000, '');
     return;
-
   }
   addTodosList($todosInput.value);
   $todosInput.value = '';
-}
+};

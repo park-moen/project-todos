@@ -21,50 +21,71 @@ header h1 {
 }
 /* calendar start */
 .calendar-months {
+  font-size: 1.5rem;
   justify-content: center;
   margin: 0;
   padding: 0;
   background-color: pink;
-  width:714px;
+  width: 714px;
   list-style-type: none;
   display: flex;
 }
-
-
-/* 내가 씀 : this-month 글씨 조정 */
-/* 임시로 체크 잘 되나 확인하는 거 */
-.calendar-months > .month {
+.calendar-months > .calendar-date {
   display: inline;
-  font-size: 1.5rem;
   vertical-align: bottom;
 }
-
 .calendar-months > .this-month {
   color: red;
+  font-size: 3rem;
+  transition-duration: 1s;
+  transition-property: font-size;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); 
+}
+.calendar-dates {
   font-size: 2rem;
 }
-
-.calendar-months > .month:hover {
-  color: pink;
+.calendar-dates {
+  font-size: 2rem;
+  height: 80px;
 }
-
+.calendar-date.today {
+  background-image: url('../img/red_circle.png');
+  background-position: center;
+  background-size: 60% 140%;
+  background-repeat: no-repeat;
+}
+.calendar-date:hover {
+  font-size: 2rem;
+  background-color: pink;
+}
 .calendar-days {
   margin: 0;
   padding: 0;
   background-color: yellow;
-  width:714px;
+  width:700px;
   list-style-type: none;
   display: flex;
 }
 .calendar-day {
-  width:100px;
+  width: 100px;
   border: 1px solid blue;
 }
 .calendar-dates {
-  width: 714px;
-  border: 1px solid red;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: wrap;
+  list-style-type: none;
+  width: 700px;
 }
-
+.calendar-space {
+  width:100px;
+  height: 100;
+}
+.calendar-date {
+  width:100px;
+  text-align: center;
+}
 /* todos style */
 .todos-container {
   border: 5px solid red;
@@ -89,4 +110,22 @@ header h1 {
   border: 2px solid lightgray;
   border-radius: 5px;
   font-size: 1rem;
+}
+.alert {
+  height: 10px;
+  font-size: .8rem;
+  color: rgb(255, 0, 0);
+}
+.todos-list {
+  padding: 0;
+  list-style-type: none;
+}
+.todos-list > li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5rem;
+  font-size: 2rem;
+}
+.todos-list > li > label > input {
+  border: 0 #fff;
 }
