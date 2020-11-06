@@ -52,9 +52,9 @@ const listRender = () => {
   todos.forEach(
     ({ id, content, completed }) => {
       html += `
-        <li id="${id}">
+        <li id="${id}" class="todo-item">
           <label><input type="checkbox" ${completed ? ' checked' : ''}><span>${content}</span></label>
-          <button class="remove">X</button>
+          <i class="remove-todo fa fa-trash-o" aria-hidden="true"></i>
        </li>`;
     }
   );
@@ -67,6 +67,18 @@ const addTodosList = content => {
   todos = [...todos, {id: maxId(), content, completed: false}];
 
   listRender();
+};
+
+const removeTodosList = id => {
+  todos = todos.filter(todo => todo.id !== +id);
+
+  listRender();
+};
+
+const updateCompleted = target => {
+  todos.forEach(todo => {
+    if (todo.id === +target.parentNode.parentNode.id) todo.completed = !todo.completed;
+  });
 };
 
 // CalendarEVENTS
@@ -90,4 +102,12 @@ $todosInput.onkeyup = e => {
 
   addTodosList($todosInput.value);
   $todosInput.value = '';
+};
+$todosList.onclick = e => {
+  if (!e.target.matches('.todos-list .remove-todo')) return;
+  console.log(e.target);
+  removeTodosList(e.target.parentNode.id);
+};
+$todosList.onchange = e => {
+  updateCompleted(e.target);
 };

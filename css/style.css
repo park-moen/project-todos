@@ -2,17 +2,19 @@ body {
   box-sizing: border-box;
   font-size: 10px;
 }
-header {
+.title {
   border: 5px solid black;
-}
-header h1 {
   text-align: center;
+  font-size: 1.5rem;
+}
+.title h1 {
+  margin: 2rem 0;
 }
 .container {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 80vh;
+  height: 70vh;
 }
 .calendar-container {
   border: 5px solid blue;
@@ -40,7 +42,7 @@ header h1 {
   font-size: 3rem;
   transition-duration: 1s;
   transition-property: font-size;
-  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); 
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .calendar-dates {
   font-size: 2rem;
@@ -57,7 +59,7 @@ header h1 {
   margin: 0;
   padding: 0;
   background-color: yellow;
-  width:700px;
+  width: 700px;
   list-style-type: none;
   display: flex;
 }
@@ -74,13 +76,12 @@ header h1 {
   width: 700px;
 }
 .calendar-space {
-  width:100px;
+  width: 100px;
   height: 100;
 }
 .calendar-date {
-  width:100px;
+  width: 100px;
 }
-
 
 /* todos style */
 .todos-container {
@@ -119,4 +120,19 @@ header h1 {
 }
 .todos-list > li > label > input {
   border: 0 #fff;
+}
+.todos-list > li > label > input[type='checkbox']:checked + span {
+  text-decoration: line-through;
+}
+.remove-todo {
+  display: none;
+  position: absolute;
+  top: 60%;
+  right: 100px;
+  cursor: pointer;
+  transform: translate3d(0, -50%, 0);
+  font-size: 3rem;
+}
+.todo-item:hover > .remove-todo {
+  display: block;
 }
