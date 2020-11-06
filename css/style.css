@@ -56,7 +56,7 @@ h1 > span:last-child {
 }
 .calendar-container {
   border: 5px solid blue;
-  width: 100%;
+  width: 707px;
   height: 100%;
 }
 
@@ -67,7 +67,7 @@ h1 > span:last-child {
   margin: 0;
   padding: 0;
   background-color: #7498a8;
-  width: 714px;
+  width: 707px;
   list-style-type: none;
   display: flex;
 }
@@ -114,7 +114,7 @@ h1 > span:last-child {
   margin: 0;
   padding: 0;
   background-color: #bdc3c7;
-  width: 72rem;
+  width: 707px;
   list-style-type: none;
   display: flex;
   font-weight: 400;
@@ -126,15 +126,19 @@ h1 > span:last-child {
   display: flex;
   flex-flow: wrap;
   list-style-type: none;
-  width: 700px;
+  width: 707px;
 }
 .calendar-space {
   width: 100px;
   height: 100;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
 }
 .calendar-date {
   width: 100px;
   text-align: center;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
 }
 .calendar-day:first-child {
   color: red;
