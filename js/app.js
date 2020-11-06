@@ -68,7 +68,8 @@ const addTodosList = content => {
 };
 const editAlert = msg => {
   document.querySelector('.alert').textContent = msg;
-}
+};
+
 const removeTodosList = id => {
   todos = todos.filter(todo => todo.id !== +id);
   listRender();
