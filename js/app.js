@@ -1,6 +1,8 @@
 // states
 let dataOfEachMonth = [];
 let todos = [];
+const today = new Date();
+
 // CalendarDOMs
 let $thisMonth = document.querySelector('.this-month');
 const $calendarMonths = document.querySelector('.calendar-months');
@@ -36,6 +38,7 @@ const renderCalendar = () => {
     const $li = document.createElement('li');
     $li.classList.add('calendar-date');
     $li.appendChild(document.createTextNode(i + ''));
+    if (today.getDate() === i && +today.getMonth() + 1 === +document.querySelector('.this-month').textContent) $li.classList.add('today');
     $calendarDates.appendChild($li);
   }
 };
@@ -46,28 +49,35 @@ const listRender = () => {
   todos.forEach(
     ({ id, content, completed }) => {
       html += `
-        <li id="${id}">
+        <li id="${id}" class="todo-item">
           <label><input type="checkbox" ${completed ? ' checked' : ''}><span>${content}</span></label>
-          <button class="remove">X</button>
+          <i class="remove-todo fa fa-trash-o" aria-hidden="true"></i>
        </li>`;
     }
   );
-
   $todosList.innerHTML = html;
 };
-
 const fetchTodos = () => {
   todos = [];
+  listRender();
+};
+const maxId = () => (todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1);
+const addTodosList = content => {
+  todos = [...todos, { id: maxId(), content, completed: false }];
+  listRender();
+};
+const editAlert = msg => {
+  document.querySelector('.alert').textContent = msg;
+}
+const removeTodosList = id => {
+  todos = todos.filter(todo => todo.id !== +id);
 
   listRender();
 };
-
-const maxId = () => (todos.length ? Math.max(...todos.map(todo => todo.id)) + 1 : 1);
-
-const addTodosList = content => {
-  todos = [...todos, { id: maxId(), content, completed: false }];
-
-  listRender();
+const updateCompleted = target => {
+  todos.forEach(todo => {
+    if (todo.id === +target.parentNode.parentNode.id) todo.completed = !todo.completed;
+  });
 };
 
 // CalendarEVENTS
@@ -81,6 +91,19 @@ $calendarMonths.onclick = e => {
   console.log(e.target);
   getThisMonth(e.target);
   renderCalendar();
+};
+$calendarDates.onclick = e => {
+  if (!e.target.matches('.calendar-date')) return;
+  [...$calendarDates.children].forEach(date => {
+    date.classList.toggle('date-selected', e.target === date);
+  });
+};
+$calendarDates.oncontextmenu = e => {
+  if (!e.target.matches('.calendar-date')) return;
+  e.preventDefault();
+  [...$calendarDates.children].forEach(date => {
+    date.classList.remove('date-selected');
+  });
 };
 
 $calendarDates.onclick = e => {
@@ -101,9 +124,22 @@ $calendarDates.oncontextmenu = e => {
 
 // TodosEVENTS
 window.onload = fetchTodos;
-
 $todosInput.onkeyup = e => {
   if (e.key !== 'Enter' || !e.target.value) return;
+  if (todos.length >= 5) {
+    $todosInput.value = '';
+    editAlert('일정 추가는 최대 5개까지 가능합니다.');
+    console.log(document.querySelector('.alert').textContent);
+    setTimeout(editAlert, 2000, '');
+    return;
+  }
   addTodosList($todosInput.value);
   $todosInput.value = '';
+};
+$todosList.onclick = e => {
+  if (!e.target.matches('.todos-list .remove-todo')) return;
+  removeTodosList(e.target.parentNode.id);
+};
+$todosList.onchange = e => {
+  updateCompleted(e.target);
 };
