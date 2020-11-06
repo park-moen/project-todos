@@ -102,8 +102,12 @@ h1 > span:last-child {
   padding: 0;
   background-color: yellow;
   width: 700px;
+  height: 50px;
   list-style-type: none;
   display: flex;
+  font-size: 2rem;
+  line-height:50px ;
+  text-align: center;
 }
 .calendar-dates {
   margin: 0;
