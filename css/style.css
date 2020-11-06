@@ -1,0 +1,162 @@
+body {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+.title {
+  border: 5px solid black;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.title h1 {
+  margin: 2rem 0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 70vh;
+}
+.calendar-container {
+  border: 5px solid blue;
+  width: 100%;
+  height: 100%;
+}
+/* calendar start */
+.calendar-months {
+  font-size: 1.5rem;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background-color: pink;
+  width: 714px;
+  list-style-type: none;
+  display: flex;
+}
+.calendar-months > .calendar-date {
+  display: inline;
+  vertical-align: bottom;
+}
+.calendar-months > .this-month {
+  color: red;
+  font-size: 3rem;
+  transition-duration: 1s;
+  transition-property: font-size;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.calendar-dates {
+  font-size: 2rem;
+}
+.calendar-dates {
+  font-size: 2rem;
+  height: 80px;
+}
+.calendar-date.today {
+  background-image: url('../img/red_circle.png');
+  background-position: center;
+  background-size: 60% 140%;
+  background-repeat: no-repeat;
+}
+.calendar-date:hover {
+  font-size: 2rem;
+  background-color: pink;
+}
+.calendar-days {
+  margin: 0;
+  padding: 0;
+  background-color: yellow;
+  width: 700px;
+  height: 50px;
+  list-style-type: none;
+  display: flex;
+  font-size: 2rem;
+  line-height:50px ;
+  text-align: center;
+}
+.calendar-dates {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: wrap;
+  list-style-type: none;
+  width: 700px;
+}
+.calendar-space {
+  width: 100px;
+  height: 100;
+}
+.calendar-date {
+  width: 100px;
+  text-align: center;
+}
+.calendar-day {
+  width: 100px;
+  border: 1px solid blue;
+}
+.date-selected {
+  background-color: skyblue;
+}
+.date-selected {
+  background-color: skyblue;
+}
+
+/* todos style */
+.todos-container {
+  border: 5px solid red;
+  width: 100%;
+  height: 100%;
+}
+.todos-main {
+  text-align: center;
+  font-weight: 700;
+}
+.todos-main .todos-date {
+  padding: 2rem 0 1rem;
+  font-size: 4rem;
+}
+.todos-main .todos-day {
+  padding: 1rem 0 1.5rem;
+  font-size: 2rem;
+}
+.todos-main .todos-input {
+  border: 0;
+  padding: 10px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.alert {
+  height: 10px;
+  font-size: 0.8rem;
+  color: rgb(255, 0, 0);
+}
+.todos-list {
+  padding: 0;
+  list-style-type: none;
+}
+.todos-list > li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5rem;
+  font-size: 2rem;
+}
+.todos-list > li > label > input {
+  border: 0 #fff;
+}
+.todos-list > li > label > input[type='checkbox']:checked + span {
+  text-decoration: line-through;
+}
+
+.remove-todo {
+  display: none;
+  top: 60%;
+  right: 100px;
+  cursor: pointer;
+  font-size: 2rem;
+}
+.todo-item {
+  display: flex;
+  vertical-align: middle;
+}
+.todo-item:hover > .remove-todo {
+  display: block;
+}

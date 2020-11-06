@@ -4,34 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
+  <header class="title">
     <h1>K-달력</h1>
   </header>
+  <!-- calendar -->
   <div class="container">
-    <div class="calender">
-      <h2>년월</h2>
-      <select name="" id=""></select>
-      <ul>
-        <li>0</li>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
+    <div class="calendar-container">
+      <ul class="calendar-months">       
+        <li class="month">1</li>
+        <li class="month">2</li>
+        <li class="month">3</li>
+        <li class="month">4</li>
+        <li class="month">5</li>
+        <li class="month">6</li>
+        <li class="month">7</li>
+        <li class="month">8</li>
+        <li class="month">9</li>
+        <li class="month">10</li>
+        <li class="month this-month">11</li>
+        <li class="month">12</li>
       </ul>
-      <ul></ul>
+      <ul class="calendar-days">
+        <li class="calendar-day">日</li>
+        <li class="calendar-day">月</li>
+        <li class="calendar-day">火</li>
+        <li class="calendar-day">水</li>
+        <li class="calendar-day">木</li>
+        <li class="calendar-day">金</li>
+        <li class="calendar-day">土</li>
+      </ul>
+      <ul class ="calendar-dates">
+      </ul>
     </div>
-    <div class="todos">
-      <div>
-        <div>100</div>
-        <div>화</div>
-        <input type="text" placeholder="일정을 입력하세요!">
+    <!-- todos -->
+    <div class="todos-container">
+      <div class="todos-main">
+        <div class="todos-date"></div>
+        <div class="todos-day"></div>
+        <input class="todos-input" type="text" placeholder="일정을 입력하세요!">
+        <p class="alert"></p>
       </div>
-      <ul></ul>
+      <ul class="todos-list"></ul>
     </div>
   </div>
   <script src="js/app.js"></script>
