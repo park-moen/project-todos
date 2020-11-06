@@ -99,7 +99,6 @@ const editAlert = msg => {
 };
 const removeTodosList = id => {
   todos = todos.filter(todo => todo.id !== +id);
-
   listRender();
 };
 const updateCompleted = target => {
@@ -182,7 +181,7 @@ $todosInput.onkeyup = e => {
   $todosInput.value = '';
 };
 $todosList.onclick = e => {
-  if (!e.target.matches('.todos-list .remove-todo')) return;
+  if (!e.target.matches('.remove-todo')) return;
   removeTodosList(e.target.parentNode.id);
 };
 $todosList.onchange = e => {
